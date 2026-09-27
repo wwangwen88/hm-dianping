@@ -4,14 +4,14 @@ spring:
   application:
     name: hmdp
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/hmdp?useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.198.128:3307/hmdp?useSSL=false&serverTimezone=UTC
     username: root
-    password: 123
+    password: 123456
   redis:
-    host: 192.168.150.101
+    host: 192.168.198.128
     port: 6379
-    password: 123321
+    password: 123456
     lettuce:
       pool:
         max-active: 10
@@ -25,5 +25,3 @@ mybatis-plus:
 logging:
   level:
     com.hmdp: debug
-  pattern:
-    dateformat: mm:ss.SSS

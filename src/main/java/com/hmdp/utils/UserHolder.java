@@ -9,8 +9,7 @@ public class UserHolder {
         tl.set(user);
     }
 
-    public static UserDTO getUser(){
-        return tl.get();
+    public static UserDTO getUser(){ return tl.get();
     }
 
     public static void removeUser(){

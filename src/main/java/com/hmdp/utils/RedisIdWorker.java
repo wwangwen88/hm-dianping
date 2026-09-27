@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-
 @Component
 public class RedisIdWorker {
     /**
@@ -17,7 +16,6 @@ public class RedisIdWorker {
      * 序列号的位数
      */
     private static final int COUNT_BITS = 32;
-
     private StringRedisTemplate stringRedisTemplate;
 
     public RedisIdWorker(StringRedisTemplate stringRedisTemplate) {

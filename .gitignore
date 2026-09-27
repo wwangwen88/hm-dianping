@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+### AI 插件 ###
+.proxyai/

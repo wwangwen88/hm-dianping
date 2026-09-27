@@ -13,22 +13,27 @@ import javax.annotation.Resource;
 public class MvcConfig implements WebMvcConfigurer {
 
     @Resource
+    private LoginInterceptor loginInterceptor;
+
+    @Resource
     private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // 登录拦截器
-        registry.addInterceptor(new LoginInterceptor())
-                .excludePathPatterns(
-                        "/shop/**",
-                        "/voucher/**",
-                        "/shop-type/**",
-                        "/upload/**",
-                        "/blog/hot",
-                        "/user/code",
-                        "/user/login"
-                ).order(1);
-        // token刷新的拦截器
-        registry.addInterceptor(new RefreshTokenInterceptor(stringRedisTemplate)).addPathPatterns("/**").order(0);
+        // token刷新的拦截器：先执行，负责识别用户并续期，不拦截请求
+        registry.addInterceptor(new RefreshTokenInterceptor(stringRedisTemplate))
+                .addPathPatterns("/**")
+                .order(0);
+
+        // 登录拦截器：后执行，负责校验登录状态
+        registry.addInterceptor(loginInterceptor).excludePathPatterns(
+                "/user/code",
+                "/user/login",
+                "/shop/**",
+                "/shop-type/**",
+                "/blog/hot",
+                "/upload/**",
+                "/voucher/**"
+        ).order(1);
     }
 }
